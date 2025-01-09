@@ -10,6 +10,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end,
 })
 
+
 return require('packer').startup(function(use)
     -- Packer can manage itself
     use('wbthomason/packer.nvim')
@@ -37,11 +38,20 @@ return require('packer').startup(function(use)
       end,
     })
 
+    use({
+      'neovim/nvim-lspconfig',
+      config = function()
+        local nvim_lsp = require('lspconfig')
+
+        -- Configure Pyright for Python
+        nvim_lsp.pyright.setup{}
+      end,
+    })
+
+
     use({ 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' })
     use({ 'nvim-treesitter/nvim-treesitter-refactor', after = 'nvim-treesitter' })
     use({ 'windwp/nvim-ts-autotag', after = 'nvim-treesitter' })
 
-
-    
 end)
 
